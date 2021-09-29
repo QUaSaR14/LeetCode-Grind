@@ -33,6 +33,7 @@ public :
                 temp = temp->getNext(bitVal);
             }
         }
+        temp->value = num;
     }
 
     int getMinXOR(int num) {
