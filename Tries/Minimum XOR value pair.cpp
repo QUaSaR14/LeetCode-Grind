@@ -24,7 +24,7 @@ public :
     void insert(int num) {
         Node* temp = root;
         for(int bit=31; bit>=0; bit--) {
-            int bitVal = num & (1<<bit);
+            int bitVal = (bool)(num & (1<<bit));
             if(temp->contains(bitVal)) {
                 temp = temp->getNext(bitVal);
             }
@@ -39,7 +39,7 @@ public :
     int getMinXOR(int num) {
         Node* temp = root;
         for(int bit=31; bit>=0; bit--) {
-            int bitVal = num & (1<<bit);
+            int bitVal = (bool)(num & (1<<bit));
             // If we find same bit number then move ahead
             // Otherwise pick the one that is present
             if(temp->contains(bitVal)) {
