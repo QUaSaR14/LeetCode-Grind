@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 struct Node {
 	Node* arr[26]; 
 	bool flag = false; 
