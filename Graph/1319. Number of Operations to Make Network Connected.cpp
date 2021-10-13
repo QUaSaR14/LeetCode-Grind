@@ -43,6 +43,7 @@ public:
 
 class DSU {
     vector<int> parent, size;
+    int count;
 public: 
     
     DSU(int n) {
@@ -50,6 +51,7 @@ public:
             parent.push_back(i);
             size.push_back(1);
         }
+        count = n;
     }
     
     int findParent(int num) {
@@ -71,6 +73,11 @@ public:
             parent[parV] = parU;
             size[parU] += size[parV];
         }
+        count--;
+    }
+    
+    int getCount() {
+        return count;
     }
     
 };
@@ -89,12 +96,6 @@ public:
             dsu.unionBySize(connection[0], connection[1]);
         }
         
-        int components = 0;
-        
-        for(int i=0; i<n; i++) {
-            if(dsu.findParent(i) == i) components++;
-        }
-        
-        return components - 1;
+        return dsu.getCount() - 1;
     }
 };
