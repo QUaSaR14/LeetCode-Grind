@@ -1,6 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Premium Question : DSU
+// Problem link : https://leetcode.ca/all/694.html
+// Solution Link : https://jimmylin1991.gitbook.io/practice-of-algorithm-problems/dfs-and-bfs/694.-number-of-distinct-islands
+
+/*
+    Idea here is to do DFS and do similar traversal as we do in standard "Number of Islands" problem. 
+    Trick here is to also store directions that we take, in form of a string for each island. 
+    EX : "Up -> Left -> Up -> Right -> Down" as "ulurd" and store this string into a set.
+    Thus, Number of Distinct islands will be simply size of this set in which we store strings.
+*/
+
 static int X[4] = {-1, 0, 1, 0};
 static int Y[4] = {0, -1, 0, 1};
 static char D[4] = {'u', 'l', 'd', 'r'};
