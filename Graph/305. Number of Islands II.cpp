@@ -1,6 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Premium Question : DSU
+// Problem link : https://leetcode.ca/all/305.html
+// Solution Link : https://jimmylin1991.gitbook.io/practice-of-algorithm-problems/graph/305.-number-of-islands-ii
+
+/*
+    Idea here is to convert 2D -> 1D and do union-find for each given positions with its adjacent nodes.
+    Also, we keep track of count of unions performed. So, to get total no. of islands at a given time, 
+    we simply subtract count from total ones (1) occured till now. This gives us no. of islands. 
+    Also refer Number of Islands I problem, to get more detail. 
+*/
+
 static int X[4] = {-1, 0, 0, 1};
 static int Y[4] = {0, -1, 1, 0};
 
