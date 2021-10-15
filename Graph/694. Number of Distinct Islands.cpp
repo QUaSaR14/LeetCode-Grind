@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Premium Question : DSU
+// Premium Question : DFS, String, Set 
 // Problem link : https://leetcode.ca/all/694.html
 // Solution Link : https://jimmylin1991.gitbook.io/practice-of-algorithm-problems/dfs-and-bfs/694.-number-of-distinct-islands
 
