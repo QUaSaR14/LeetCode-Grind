@@ -21,6 +21,8 @@ using namespace std;
 
     Time : O(P + W * 4a) , P : No. of pairs to do union. , W : No. of words and to do find operation in DSU
     Space : O(P) , to store all pairs in map and to create parent & rank for DSU
+
+    This is a follow up of Sentence Similarity problem. 
 */
 
 class DSU {
