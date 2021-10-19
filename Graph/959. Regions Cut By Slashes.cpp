@@ -30,7 +30,7 @@ public:
             return;
         }
         
-        if(size[parU] <= size[parV]) {
+        if(size[parU] < size[parV]) {
             parent[parU] = parV;
             size[parV] += size[parU];
         }

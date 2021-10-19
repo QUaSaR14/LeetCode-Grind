@@ -42,7 +42,7 @@ public:
         
         if(parU == parV) return false;
         
-        if(size[parU] <= size[parV]) {
+        if(size[parU] < size[parV]) {
             parent[parU] = parV;
             size[parV] += size[parU];
         }
