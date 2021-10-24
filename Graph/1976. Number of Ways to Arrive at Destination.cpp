@@ -9,10 +9,10 @@ public:
         vector<long long> ways(n, 0);
         vector<long long> dist(n, 1e18);
         
-        dist[0] = 0;
-        ways[0] = 1;
+        dist[0] = 0, ways[0] = 1;
         
         vector<pair<long long, long long>> adj[n];
+
         for(auto& road : roads) {
             adj[road[0]].push_back({road[1], road[2]});
             adj[road[1]].push_back({road[0], road[2]});
@@ -42,7 +42,6 @@ public:
                 }
             }
         }
-        
         return ways[n-1];
     }
 };
