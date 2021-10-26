@@ -4,6 +4,7 @@ using namespace std;
 static int X[4] = {0, 0, 1, -1};
 static int Y[4] = {1, -1, 0, 0};
 
+// Approach 1 : using extra space by creating adjacency list
 class Solution {
 public:
     int minCost(vector<vector<int>>& grid) {
@@ -75,6 +76,69 @@ public:
             }
         }
         
+        return -1;
+    }
+};
+
+// Approach 2 : doing inplace without adjacency list
+static int X[4] = {0, 0, 1, -1};
+static int Y[4] = {1, -1, 0, 0};
+
+class Solution {
+public:
+    int minCost(vector<vector<int>>& grid) {
+        
+        int m = grid.size(); 
+        int n = grid[0].size();
+        
+        /*
+            IMAGINE Graph by converting 2D -> 1D. So, say (i,j) = i*n + j = u
+            If there is a sign from nth node to its adjacent then cost to move is 0. 
+                * Thus edge wt will be 0 for u -> v
+            
+            Otherwise, edge weight will be 1. Since we have to modify sign in that direction to move.
+                * Edge wt will be 1 for u -> v
+        */
+        
+        // Simply do 0-1 BFS to find shortest distance from source=0 to destionation=m*n-1
+        deque<pair<int, int>> dq;
+        vector<int> dist(m*n, INT_MAX);
+        
+        int source = 0, destination = m*n - 1;
+        
+        dq.push_front({source, 0});
+        dist[source] = 0;
+                
+        while(dq.size()) {
+            int node = dq.front().first;
+            int dis = dq.front().second;
+            
+            dq.pop_front();
+            
+            if(node == destination) {
+                return dis;
+            }
+            
+            int x = node/n , y = node%n;
+            
+            for(int k=0; k<4; k++) {
+                int i = x + X[k];
+                int j = y + Y[k];
+                
+                int u = i*n + j;
+                
+                if(i>=0 && j>=0 && i<m && j<n) {
+                    int wt = (grid[x][y] != k+1);
+                    
+                    if(dis + wt < dist[u])
+                    {
+                        dist[u] = dis + wt;
+                        if(wt == 1) dq.push_back({u, dis + wt});
+                        else dq.push_front({u, dis + wt});
+                    }
+                }
+            }
+        }        
         return -1;
     }
 };
