@@ -97,3 +97,71 @@ public:
         return safeNodes;
     }
 };
+
+/**
+ * Apprach 3: DFS using states to detect cycle
+ * 
+ * In normal (standard) cycle detection using DFS we use two visited array, one to check overall visited and one to check visited for a path.
+ * So Idea, here we use a single array of int, which store the state of a node. 
+ * Here we mark node as unsafe : if node is part of cycle. Otherwise we mark it as safe. 
+ * Unsafe is when a node is already visited overall as well in dfs path.
+ * Thus, all nodes that are not present in a cycle are Safe nodes and we return those nodes in sorted order.
+*/
+
+class Solution {
+public:
+    
+    /*
+        State of Nodes : 
+            
+            0 -> Unvisited
+            1 -> Visited
+            2 -> Safe
+            3 -> Unsafe (Part of a cycle)
+    */
+    
+    bool detectCycle(vector<vector<int>>& graph, vector<int>& state, int node) {
+        
+        state[node] = 1;
+        
+        for(auto& adjnode : graph[node]) {
+            // If node is unvisited, then continue traversal
+            if(state[adjnode] == 0) {
+                if(detectCycle(graph, state, adjnode)) {
+                    state[node] = 3;
+                    return true;
+                }
+            }
+            else if(state[adjnode] != 2) {
+                state[node] = 3;
+                return true;
+            }
+        }
+        
+        state[node] = 2;
+        return false;
+    }
+    
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        
+        int n = graph.size();
+        
+        vector<int> state(n, 0);
+        
+        for(int i=0; i<n; i++) {
+            if(state[i] == 0) {
+                detectCycle(graph, state, i);
+            }
+        }
+        
+        vector<int> safeNodes;
+        
+        for(int i=0; i<n; i++) {
+            if(state[i] == 2) {
+                safeNodes.push_back(i);
+            }
+        }
+        
+        return safeNodes;
+    }
+};
