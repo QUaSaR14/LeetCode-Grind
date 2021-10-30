@@ -50,3 +50,50 @@ public:
         return safeNodes;
     }
 };
+
+/**
+ * Approach 2: DFS (Detect Cycle)
+*/
+
+class Solution {
+public:
+    
+    bool detectCycle(vector<vector<int>>& graph, vector<bool>& vis, vector<bool>& isSafe, int node) {
+        
+        vis[node] = true;
+        
+        for(auto& adjnode : graph[node]) {
+            if(!vis[adjnode]) {
+                if(detectCycle(graph, vis, isSafe, adjnode)) 
+                    return true;
+            }
+            else if(!isSafe[adjnode]) return true;
+        }
+        
+        isSafe[node] = true;
+        return false;
+    }
+    
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        
+        int n = graph.size();
+        
+        vector<bool> vis(n, false);
+        vector<bool> isSafe(n, false);
+        
+        for(int i=0; i<n; i++) {
+            if(!vis[i]) {
+                detectCycle(graph, vis, isSafe, i);
+            }
+        }
+        
+        vector<int> safeNodes;
+        for(int i=0; i<n; i++) {
+            if(isSafe[i]) {
+                safeNodes.push_back(i);
+            }
+        }
+        
+        return safeNodes;
+    }
+};
